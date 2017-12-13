@@ -1,3 +1,5 @@
+const sortFunc = Symbol('sortFunc');
+
 // 定义排序的table类
 class Tables {
   constructor(clsName) {
@@ -25,8 +27,19 @@ class TableSort {
 
   }
 
+  // 排序函数，依照这个函数来排序
+  [sortFunc]() {
+    for (let i = 0; i < arguments.length; i++) {
+      const element = arguments[i];
+      if (typeof element === 'string') {
+        
+      }
+    }
+  }
+
   // 排序事件, 按照第n列排序
   sortRow (n) {
-    let rows = this.el
+    let rows = Array.prototype.slice.call(this.el.tBodies[0].children, 0);
+    [sortFunc].apply(this, rows);
   }
 }

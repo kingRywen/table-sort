@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      // template: './src/index.tmpl.jade'
+      template: './src/index.tmpl.html'
     })
   ]
 }
