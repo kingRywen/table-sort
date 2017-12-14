@@ -2,6 +2,7 @@ const merge = require('webpack-merge')
 const webpack = require('webpack');
 const path = require('path');
 const common = require('./webpack.common');
+const es3ifyPlugin = require('es3ify-webpack-plugin'); // 兼容ie8 模块命名default bug
 
 // 压缩js文件
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -11,8 +12,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge(common, {
 	entry: {
-		index: './src/index.js',
-		another: './src/another_module.js'
+		index: './src/index.js'
 	},
 
 	module: {
@@ -22,7 +22,7 @@ module.exports = merge(common, {
 			loader: 'babel-loader',
 
 			options: {
-				presets: ['es2015']
+				presets: ['env']
 			}
 		},
 		{
@@ -69,6 +69,7 @@ module.exports = merge(common, {
 	},
 
 	plugins: [
+		new es3ifyPlugin(),
 		new UglifyJSPlugin(),
 		new ExtractTextPlugin('style.css'),
 		new webpack.DefinePlugin({
@@ -77,8 +78,8 @@ module.exports = merge(common, {
 			}
 		}),
 		// 移除公用重复的模块
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'common' // 指定公用模块的名字
-		})
+		// new webpack.optimize.CommonsChunkPlugin({
+		// 	name: 'common' // 指定公用模块的名字
+		// })
 	]
 });
