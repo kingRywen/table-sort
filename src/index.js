@@ -1,3 +1,5 @@
+import './style/table_elm.scss'
+
 let sortFunc;
 try {
   sortFunc = Symbol('sortFunc');
@@ -27,7 +29,6 @@ let addEvent = (function (el, type, fn) {
 // 定义排序的table类
 class Tables {
   constructor(clsName) {
-    console.log('初始化')
     let el = document.querySelectorAll(clsName);
     if (el.length === 0) {
       throw new Error('没有指定元素类名');
@@ -40,6 +41,11 @@ class Tables {
   // 初始化所有的table
   init() {
     this.tbs.forEach(element => {
+      // 为每个table加上样式class类名
+      if (element.className.indexOf('table__sort') === -1) {
+        element.className = element.className + ' table__sort';
+      }
+
       let extract = new TableSort(element);
       this.tbsExtract.push(extract);
     });
@@ -128,9 +134,10 @@ class TableSort {
     }
     els = Array.prototype.slice.call(this.el.firstElementChild.children[0].children, 0);
     els.forEach((el, index) => {
+      var that = this;
       console.log('yes', index);
       this.isSort.push(false);
-      var that = this;
+
       addEvent(el, 'click', function (e) {
         console.log('点击', index)
         that.sortRow(index);
