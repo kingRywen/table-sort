@@ -138,6 +138,15 @@ class TableSort {
       console.log('yes', index);
       this.isSort.push(false);
 
+      // 在每个el中加入指示排序状态的箭头
+      let div = document.createElement('div');
+      div.className = 'cell';
+      let arrowSpan = document.createElement('span');
+      let reverseArrow = document.createElement('i');
+      let arrow = document.createElement('i');
+      arrowSpan.appendChild(reverseArrow);
+      arrowSpan.appendChild(arrow);
+      el.appendChild(arrowSpan);
       addEvent(el, 'click', function (e) {
         console.log('点击', index)
         that.sortRow(index);

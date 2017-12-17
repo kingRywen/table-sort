@@ -1,9 +1,31 @@
 .table__sort {
-  border: none;
+  font: 14px/48px 'Microsoft YaHei';
+  width: 100%;
+  border: 0;
+  letter-spacing: 0;
+  border-collapse: collapse;
   thead {
-    background: #ddd;
+    color: #a8a8a8;
+    th {
+      font-weight: bold;
+      text-align: left;
+      padding-left: 8px;
+      border-bottom: 1px solid #eee;
+      .cell {
+            width: 0;
+            height: 0;
+            border: 5px solid;
+            border-color: transparent;
+            border-top-color: #ddd;
+            display: inline-block;
+      }
+    }
   }
   tbody {
-    color: #f00;
+    color: #666;
+    td {
+      padding-left: 8px;
+      border-bottom: 1px solid #eee;
+    }
   }
 }

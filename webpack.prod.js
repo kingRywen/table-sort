@@ -15,6 +15,13 @@ module.exports = merge(common, {
 		index: './src/index.js'
 	},
 
+	stats: {
+		// 增加资源信息
+		assets: true,
+		children: false,
+		colors: true
+	},
+
 	module: {
 		rules: [{
 			test: /\.js$/,
