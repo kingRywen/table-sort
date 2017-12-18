@@ -26,31 +26,7 @@ let addEvent = (function (el, type, fn) {
   return fn;
 })();
 
-// 定义排序的table类
-export default class Tables {
-  constructor(clsName) {
-    let el = document.querySelectorAll(clsName);
-    if (el.length === 0) {
-      throw new Error('没有指定元素类名');
-    }
-    this.tbs = Array.prototype.slice.call(el, 0);
-    this.tbsExtract = [];
-    this.init();
-  }
 
-  // 初始化所有的table
-  init() {
-    this.tbs.forEach(element => {
-      // 为每个table加上样式class类名
-      if (element.className.indexOf('table__sort') === -1) {
-        element.className = element.className + ' table__sort';
-      }
-
-      let extract = new TableSort(element);
-      this.tbsExtract.push(extract);
-    });
-  }
-}
 
 class TableSort {
   constructor(el) {
@@ -193,5 +169,31 @@ class TableSort {
     if (this.el.dataset.sort === 'first') {
       this.sortRow(0);
     }
+  }
+}
+
+// 定义排序的table类
+export default class Tables {
+  constructor(clsName) {
+    let el = document.querySelectorAll(clsName);
+    if (el.length === 0) {
+      throw new Error('没有指定元素类名');
+    }
+    this.tbs = Array.prototype.slice.call(el, 0);
+    this.tbsExtract = [];
+    this.init();
+  }
+
+  // 初始化所有的table
+  init() {
+    this.tbs.forEach(element => {
+      // 为每个table加上样式class类名
+      if (element.className.indexOf('table__sort') === -1) {
+        element.className = element.className + ' table__sort';
+      }
+
+      let extract = new TableSort(element);
+      this.tbsExtract.push(extract);
+    });
   }
 }
