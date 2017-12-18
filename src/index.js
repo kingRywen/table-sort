@@ -1,3 +1,3 @@
-import Tables from 'table-sort';
+var Tables = require('table-sort');
 
 new Tables('.table');
