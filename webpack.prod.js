@@ -59,7 +59,8 @@ module.exports = merge(common, {
 				use: [{
 					loader: 'css-loader',
 					options: {
-						sourceMap: true
+						sourceMap: true,
+						minimize: true
 					}
 				},
 				{

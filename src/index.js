@@ -56,6 +56,8 @@ class TableSort {
   constructor(el) {
     this.el = el;
     this.isSort = [];
+    this.originSort = Array.prototype.slice.call(this.el.tBodies[0].children, 0);
+    this.theadEls = Array.prototype.slice.call(this.el.firstElementChild.children[0].children, 0);
     this.init();
   }
 
@@ -66,10 +68,25 @@ class TableSort {
       nums = [];
     // 判断当前点击之前有没有排序,如果有排序则直接反转
     if (this.isSort[n]) {
-      for (let i = rows.length-1; i > -1; i--) {
-        const element = rows[i];
-        this.el.tBodies[0].appendChild(element);
+      // 判断是正序还是反序
+      if (this.theadEls[n].getElementsByTagName('span')[0].firstChild.className === '') {
+        // 正序
+        this.theadEls[n].getElementsByTagName('span')[0].firstChild.className = 'live';
+        this.theadEls[n].getElementsByTagName('span')[0].lastChild.className = '';
+        for (let i = rows.length - 1; i > -1; i--) {
+          const element = rows[i];
+          this.el.tBodies[0].appendChild(element);
+        }
+      } else {
+        // 反序
+        this.theadEls[n].getElementsByTagName('span')[0].firstChild.className = '';
+        this.theadEls[n].getElementsByTagName('span')[0].lastChild.className = '';
+        this.originSort.forEach((el) => {
+          this.el.tBodies[0].appendChild(el);
+        });
+        this.isSort[n] = false;
       }
+      
       return;
     }
     // 如果没有排序，把其它列的排序状态清除，并加上所在行的排序状态为已排序
@@ -117,7 +134,13 @@ class TableSort {
     sortedArray.forEach((el) => {
       this.el.tBodies[0].appendChild(el);
     })
-    // return [].concat(nums, normalStrings, chineseStrings);
+
+    // 排序完后把排序的行标记为顺序
+    this.theadEls.forEach((el) => {
+      el.getElementsByTagName('span')[0].lastChild.className = '';
+      el.getElementsByTagName('span')[0].firstChild.className = '';
+    })
+    this.theadEls[n].getElementsByTagName('span')[0].lastChild.className = 'live';
   }
 
   // 排序事件, 按照第n列排序
@@ -128,14 +151,19 @@ class TableSort {
 
   // 在表头上绑定click事件，如果不存在表头就提示必须设置表头
   init() {
-    var els;
+    // var els;
+    let tdEls = this.el.tBodies[0].getElementsByTagName('td');  
     if (this.el.firstElementChild.nodeName !== 'THEAD') {
       throw new Error('不存在表头，请设置表头')
     }
-    els = Array.prototype.slice.call(this.el.firstElementChild.children[0].children, 0);
-    els.forEach((el, index) => {
-      var that = this;
+
+    // els = Array.prototype.slice.call(this.el.firstElementChild.children[0].children, 0);
+
+    // 遍历thead里的单元格绑定事件
+    this.theadEls.forEach((el, index) => {
       console.log('yes', index);
+      var that = this;
+      let elNodes = el.childNodes;
       this.isSort.push(false);
 
       // 在每个el中加入指示排序状态的箭头
@@ -146,12 +174,25 @@ class TableSort {
       let arrow = document.createElement('i');
       arrowSpan.appendChild(reverseArrow);
       arrowSpan.appendChild(arrow);
-      el.appendChild(arrowSpan);
+      for (let i = 0; i < elNodes.length; i++) {
+        const element = elNodes[i];
+        div.appendChild(element);
+      }
+      div.appendChild(arrowSpan);
+      el.appendChild(div);
+
+      // 绑定表头点击排序事件
       addEvent(el, 'click', function (e) {
+        e.preventDefault();
         console.log('点击', index)
         that.sortRow(index);
       });
-    })
+    });
+
+    // 如果sort属性存在，一开始就排序
+    if (this.el.dataset.sort === 'first') {
+      this.sortRow(0);
+    }
   }
 }
 
