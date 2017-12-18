@@ -1,3 +1,3 @@
-var tableSort = require('table-sort')
+import Tables from 'table-sort';
 
-new tableSort.Tables('.table');
+new Tables('.table');
