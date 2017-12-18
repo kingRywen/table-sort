@@ -27,7 +27,7 @@ let addEvent = (function (el, type, fn) {
 })();
 
 // 定义排序的table类
-class Tables {
+export default class Tables {
   constructor(clsName) {
     let el = document.querySelectorAll(clsName);
     if (el.length === 0) {
@@ -52,7 +52,7 @@ class Tables {
   }
 }
 
-export default class {
+class TableSort {
   constructor(el) {
     this.el = el;
     this.isSort = [];
