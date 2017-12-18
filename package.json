@@ -28,7 +28,7 @@
     "pug-loader": "^2.3.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
-    "table-sort": "^1.0.0",
+    "table-sort": "^1.0.1",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.12.0",
