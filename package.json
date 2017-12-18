@@ -2,7 +2,7 @@
   "name": "table-sort",
   "version": "1.0.0",
   "description": "try webpack-cli",
-  "main": "index.js",
+  "main": "dist/table-sort.js",
   "scripts": {
     "start": "webpack",
     "dev": "webpack-dev-server --config webpack.dev.js --open",

@@ -1,6 +1,6 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -10,14 +10,16 @@ module.exports = {
   },
 
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'table-sort.js',
+    path: path.resolve(__dirname, 'dist'),
+    library: 'TableSort',
+    libraryTarget: 'umd'
   },
 
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      template: './src/index.tmpl.html'
-    })
+    // new HtmlWebpackPlugin({
+    //   template: './src/index.tmpl.html'
+    // })
   ]
 }

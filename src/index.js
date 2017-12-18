@@ -52,7 +52,7 @@ class Tables {
   }
 }
 
-class TableSort {
+export class TableSort {
   constructor(el) {
     this.el = el;
     this.isSort = [];
@@ -195,5 +195,3 @@ class TableSort {
     }
   }
 }
-
-new Tables('.table');
