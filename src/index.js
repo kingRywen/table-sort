@@ -52,7 +52,7 @@ class Tables {
   }
 }
 
-export class TableSort {
+export default class {
   constructor(el) {
     this.el = el;
     this.isSort = [];
