@@ -1,4 +1,5 @@
 import './style/table_elm.scss'
+import default from 'hash.js';
 
 let sortFunc;
 try {
@@ -197,3 +198,5 @@ export class Tables {
     });
   }
 }
+
+export default Tables
