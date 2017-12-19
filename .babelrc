@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "chrome": 52,
+          "browsers": [
+            "last 200 versions"
+          ]
+        },
+        "modules": false,
+        "loose": true
+      }
+    ]
+  ]
+}
