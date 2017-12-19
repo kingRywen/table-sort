@@ -11,9 +11,6 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge(common, {
-	entry: {
-		index: './src/index.js'
-	},
 
 	stats: {
 		// 增加资源信息
@@ -25,7 +22,6 @@ module.exports = merge(common, {
 	module: {
 		rules: [{
 			test: /\.js$/,
-			exclude: /node_modules/,
 			loader: 'babel-loader',
 
 			options: {
