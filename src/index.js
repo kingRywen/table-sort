@@ -151,13 +151,10 @@ class TableSort {
 
   // 在表头上绑定click事件，如果不存在表头就提示必须设置表头
   init() {
-    // var els;
     let tdEls = this.el.tBodies[0].getElementsByTagName('td');  
     if (this.el.firstElementChild.nodeName !== 'THEAD') {
       throw new Error('不存在表头，请设置表头')
     }
-
-    // els = Array.prototype.slice.call(this.el.firstElementChild.children[0].children, 0);
 
     // 遍历thead里的单元格绑定事件
     this.theadEls.forEach((el, index) => {
@@ -181,12 +178,48 @@ class TableSort {
       div.appendChild(arrowSpan);
       el.appendChild(div);
 
-      // 绑定表头点击排序事件
+      // 绑定表头点击排序事件,有三种状态，顺序，逆序及不排序，点击切换
       addEvent(el, 'click', function (e) {
+        var e = e || window.event;
         e.preventDefault();
         console.log('点击', index)
         that.sortRow(index);
       });
+
+      //绑定倒序箭头点击事件，点击后按倒序排列
+      addEvent(el.firstElementChild.lastElementChild.firstElementChild, 'click', (e) => {
+        var e = e || window.event;
+        e.stopPropagation();
+        if (e.target.className.indexOf('live') >= 0) {
+          return;
+        }
+
+        if (this.isSort[index]) {
+          this.sortRow(index);
+        } else {
+          this.sortRow(index);
+          this.sortRow(index);
+        }
+        
+      });
+
+      //绑定顺序箭头点击事件，点击后按顺序排列
+      addEvent(el.firstElementChild.lastElementChild.lastElementChild, 'click', (e) => {
+        var e = e || window.event;
+        e.stopPropagation();
+        if (e.target.className.indexOf('live') >= 0) {
+          return;
+        }
+
+        if (this.isSort[index]) {
+          this.sortRow(index);
+          this.sortRow(index);
+        } else {
+          this.sortRow(index);
+        }
+        
+      });
+
     });
 
     // 如果sort属性存在，一开始就排序
