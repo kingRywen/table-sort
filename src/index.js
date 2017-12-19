@@ -198,4 +198,4 @@ class Tables {
   }
 }
 
-exports.Tables = Tables;
+export { Tables }
