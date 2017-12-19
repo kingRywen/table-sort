@@ -29,7 +29,7 @@ module.exports = merge(common, {
 			loader: 'babel-loader',
 
 			options: {
-				presets: ['env']
+				presets: ['es2015']
 			}
 		},
 		{
