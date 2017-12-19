@@ -36,6 +36,6 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
-    "table-sort": "^1.0.13"
+    "table-sort": "^1.0.14"
   }
 }
