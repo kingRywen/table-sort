@@ -1,3 +1,3 @@
 var tableSort = require('table-sort')
 // new tableSort('.table');
-console.log(123)
+console.log(tableSort.Tables('.table'))
