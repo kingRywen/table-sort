@@ -1,2 +1,3 @@
-var tableSort = require('table-sort')
-console.log(new tableSort.default.Tables('.table'))
+// var tableSort = require('table-sort')
+import tableSort from 'table-sort';
+console.log(new tableSort.Tables('.table'))
