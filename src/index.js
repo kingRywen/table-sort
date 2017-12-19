@@ -173,7 +173,7 @@ class TableSort {
 }
 
 // 定义排序的table类
-export default class Tables {
+class Tables {
   constructor(clsName) {
     let el = document.querySelectorAll(clsName);
     if (el.length === 0) {
@@ -197,3 +197,9 @@ export default class Tables {
     });
   }
 }
+
+export default (function () {
+  return {
+    Tables
+  }
+}());
