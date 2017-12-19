@@ -157,11 +157,46 @@ class TableSort {
       div.appendChild(arrowSpan);
       el.appendChild(div);
 
-      // 绑定表头点击排序事件
+      // 绑定表头点击排序事件,有三种状态，顺序，逆序及不排序，点击切换
       addEvent(el, 'click', function (e) {
+        var e = e || window.event;
         e.preventDefault();
         console.log('点击', index)
         that.sortRow(index);
+      });
+
+      //绑定倒序箭头点击事件，点击后按倒序排列
+      addEvent(el.firstElementChild.lastElementChild.firstElementChild, 'click', (e) => {
+        var e = e || window.event;
+        e.stopPropagation();
+        if (e.target.className.indexOf('live') >= 0) {
+          return;
+        }
+
+        if (this.isSort[index]) {
+          this.sortRow(index);
+        } else {
+          this.sortRow(index);
+          this.sortRow(index);
+        }
+
+      });
+
+      //绑定顺序箭头点击事件，点击后按顺序排列
+      addEvent(el.firstElementChild.lastElementChild.lastElementChild, 'click', (e) => {
+        var e = e || window.event;
+        e.stopPropagation();
+        if (e.target.className.indexOf('live') >= 0) {
+          return;
+        }
+
+        if (this.isSort[index]) {
+          this.sortRow(index);
+          this.sortRow(index);
+        } else {
+          this.sortRow(index);
+        }
+
       });
     });
 
