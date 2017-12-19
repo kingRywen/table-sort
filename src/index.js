@@ -198,8 +198,4 @@ class Tables {
   }
 }
 
-export default (function () {
-  return {
-    Tables
-  }
-}());
+exports.Tables = Tables;
