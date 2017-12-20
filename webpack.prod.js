@@ -7,9 +7,6 @@ const es3ifyPlugin = require('es3ify-webpack-plugin'); // 兼容ie8 模块命名
 // 压缩js文件
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-// 分离css文件
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = merge(common, {
 
 	stats: {
@@ -76,15 +73,10 @@ module.exports = merge(common, {
 	plugins: [
 		new es3ifyPlugin(),
 		new UglifyJSPlugin(),
-		new ExtractTextPlugin('style.css'),
 		new webpack.DefinePlugin({
 			'process.env': {
 				'NODE_ENV': JSON.stringify('production')
 			}
-		}),
-		// 移除公用重复的模块
-		// new webpack.optimize.CommonsChunkPlugin({
-		// 	name: 'common' // 指定公用模块的名字
-		// })
+		})
 	]
 });
