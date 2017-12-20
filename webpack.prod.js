@@ -52,24 +52,23 @@ module.exports = merge(common, {
 		{
 			test: /\.(scss|css)$/,
 
-			use: [{
-				loader: 'style-loader'
-			},
-			{
-				loader: 'css-loader',
-				options: {
-					sourceMap: true,
-					minimize: true
+			use: ExtractTextPlugin.extract({
+				use: [{
+					loader: 'css-loader',
+					options: {
+						sourceMap: true,
+						minimize: true
+					}
+				},
+				{
+					loader: 'sass-loader',
+					options: {
+						sourceMap: true
+					}
 				}
-			},
-			{
-				loader: 'sass-loader',
-				options: {
-					sourceMap: true
-				}
-			},
-				
-			]
+				],
+				fallback: 'style-loader'
+			})
 		}
 		]
 	},
@@ -77,6 +76,7 @@ module.exports = merge(common, {
 	plugins: [
 		new es3ifyPlugin(),
 		new UglifyJSPlugin(),
+		new ExtractTextPlugin('style.css'),
 		new webpack.DefinePlugin({
 			'process.env': {
 				'NODE_ENV': JSON.stringify('production')
