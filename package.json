@@ -1,6 +1,6 @@
 {
   "name": "table-sort",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "try webpack-cli",
   "main": "dist/table-sort.js",
   "scripts": {
