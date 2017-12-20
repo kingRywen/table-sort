@@ -7,6 +7,9 @@ const es3ifyPlugin = require('es3ify-webpack-plugin'); // 兼容ie8 模块命名
 // 压缩js文件
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+// 分离css文件
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = merge(common, {
 
 	stats: {
@@ -49,23 +52,24 @@ module.exports = merge(common, {
 		{
 			test: /\.(scss|css)$/,
 
-			use: ExtractTextPlugin.extract({
-				use: [{
-					loader: 'css-loader',
-					options: {
-						sourceMap: true,
-						minimize: true
-					}
-				},
-				{
-					loader: 'sass-loader',
-					options: {
-						sourceMap: true
-					}
+			use: [{
+				loader: 'style-loader'
+			},
+			{
+				loader: 'css-loader',
+				options: {
+					sourceMap: true,
+					minimize: true
 				}
-				],
-				fallback: 'style-loader'
-			})
+			},
+			{
+				loader: 'sass-loader',
+				options: {
+					sourceMap: true
+				}
+			},
+				
+			]
 		}
 		]
 	},
